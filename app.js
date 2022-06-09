@@ -2,6 +2,9 @@ const express= require("express");
 const bodyParser=require("body-parser");
 const app=express();
 app.set("view engine", "ejs");
+app.use(bodyParser.urlencoded({extended:true}));
+
+var items=["wake up", "pray"];
 
 app.get("/", function(req, res){
 	
@@ -9,35 +12,19 @@ app.get("/", function(req, res){
 	let day='';
 	var currentDay=d.getDay();
 	
-	switch(currentDay) {
-  case 0:
-    day="Sunday";
-    break;
-  case 1:
-    day="monday";
-    break;
-	case 2:
-    day="Tuesday";
-	case 3:
-    day="Wenesday";
+	var options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+var today  = new Date();
+ today.toLocaleDateString("en-US", options)
 
-    break;
-	case 4:
-    day="Thursday";
-    break;
-	case 5:
-    day="Friday";
-    break;
-	case 6:
-    day="Saturday";
-    break;
-	
-  default:
-    console.log("error "+ currentDay);
-}
-
-	res.render("list", {kindOfDay:day});
+	res.render("list", {kindOfDay:today, newLists:items});
 	});
+	app.post("/", function(req, res){
+		 item1=req.body.newItem;
+		 items.push(item1)
+		console.log(items);
+		res.redirect("/");
+	});
+	
 	
 app.listen(3000, function(){
 	console.log("server listening to port 3000")
