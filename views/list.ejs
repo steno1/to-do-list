@@ -2,26 +2,36 @@
 <head>
 <meta charset="utf-8">
 <title></title>
+ <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
 
-<h1><%=kindOfDay%></h1>
-<ul>
+
+<div class="box" id="heading">
+<h1>Princeley to-do-list</h1>
+
+<h2><%=kindOfDay%></h2>
+</div>
+<div class="box" >
 
 <% for (let i=0; i<newLists.length; i++){%>
-<li><%= newLists[i] %></li>
+<div class="item">
+<input type="checkbox" >
+<p><%= newLists[i] %></p>
+</div>
+
 <% }%>
-
-</ul>
-
-
-
-
-<form action="/" method="post">
-  <input type="text" name="newItem">
+<form class=""item action="/" method="post">
+  <input type="text" name="newItem" placeholder="New-item">
   
-  <button type="submit" name= "button">add+</button>
+  <button type="submit" name= "button">+</button>
 </form>
+</div>
+
+
+
+
+
 
 </body>
 </html>
