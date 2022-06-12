@@ -1,32 +1,60 @@
 const express= require("express");
 const bodyParser=require("body-parser");
+const date=require(__dirname+"/date.js");
+
+
 const app=express();
 app.set("view engine", "ejs");
 app.use(bodyParser.urlencoded({extended:true}));
 app.use(express.static('public'))
 
-var items=["wake up", "pray"];
-
+const items=["wake up", "pray"];
+const workList=[];
 app.get("/", function(req, res){
+let today=date.getDate();	
+	console.log(req.body);
 	
-	const d = new Date();
-	let day='';
-	var currentDay=d.getDay();
-	
-	var options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
-var today  = new Date();
- today.toLocaleDateString("en-US", options)
 
-	res.render("list", {kindOfDay:today, newLists:items});
+	res.render("list", {listTitle:today, newLists:items});
 	});
+	
 	app.post("/", function(req, res){
-		 item1=req.body.newItem;
-		 items.push(item1)
-		console.log(items);
-		res.redirect("/");
+		let item=req.body.newItem;
+		console.log(req.body);
+		
+	 if(req.body.list==="Work-List"){
+     workList.push(item);	
+	res.redirect("/work");
+
+     }else if(req.body.list==="calculator"){
+		  workList.push(item);	
+	res.redirect("/calculator");
+		 
+	 }
+	 else{
+      items.push(item);
+        res.redirect("/");	 	
+         }
+
+	 
+         });
+		 
+		
+	
+	
+	app.get("/work", function(req, res){
+		let steno=date.getDay();
+		res.render("list", { listTitle:steno, newLists:workList});
+	});
+	app.get("/calculator", function(req, res){
+		res.render("list", { listTitle:"calculator", newLists:workList});
+	});
+	app.get("/about", function(req, res){
+		res.render("about");
 	});
 	
 	
 app.listen(3000, function(){
 	console.log("server listening to port 3000")
 });
+

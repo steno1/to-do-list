@@ -1,4 +1,4 @@
-html {
+body {
   background-color: #E4E9FD;
   background-image: -webkit-linear-gradient(65deg, #34B3F1 50%, #8ee4af 50%);
   min-height: 1000px;
@@ -18,12 +18,16 @@ h1, h2 {
   border-radius: 20px;
   box-shadow: 5px 5px 15px -5px rgba(0, 0, 0, 0.3);
 }
-
+.container-fluid{
+	color:blue;
+}
 #heading {
   background-color: #34B3F1;
   text-align: center;
   color="white";
 }
+
+
 
 .item {
   min-height: 70px;
@@ -61,7 +65,7 @@ form {
 button {
   min-height: 50px;
   width: 50px;
-  border-radius: 50%;
+  border-radius: 60%;
   border-color: transparent;
   background-color: #8ee4af;
   color: #fff;
